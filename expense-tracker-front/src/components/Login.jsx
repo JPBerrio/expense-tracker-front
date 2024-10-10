@@ -2,6 +2,7 @@ import { useState } from "react";
 import SignIn from "./SignIn";
 import SignUp from "./SignUp";
 import axios from "axios";
+import { useNavigate } from 'react-router-dom';
 
 export default function Login() {
   const [isLogin, setIsLogin] = useState(true);
@@ -11,6 +12,8 @@ export default function Login() {
   const [age, setAge] = useState("");
   const [phone, setPhone] = useState("");
   const [email, setEmail] = useState("");
+
+  const navigate = useNavigate();
 
   const handleSignUp = async (e) => {
     e.preventDefault();
@@ -52,7 +55,7 @@ export default function Login() {
 
     try {
       const response = await axios.post(
-        "https://a3f2-2800-484-9a77-1000-acdb-9567-a951-642d.ngrok-free.app/api/auth/login",
+        "https://4752-190-71-20-66.ngrok-free.app/api/auth/login",
         {
           username,
           password,
@@ -66,8 +69,8 @@ export default function Login() {
         const isAuthenticated = () => {
           return !!localStorage.getItem("jwtToken");
         };
-        console.log(isAuthenticated());
-        // Aquí puedes redirigir al usuario o guardar el token de autenticación
+        console.log("Token guardado:", token);
+        navigate("/dashboard");
       } else {
         alert("Error al iniciar sesión.");
       }
