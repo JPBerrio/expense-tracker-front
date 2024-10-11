@@ -1,8 +1,8 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import Header from "./Header";
-import Sidebar from "./Sidebar";
-import Main from "./Main";
+import Header from "../components/Header";
+import Sidebar from "../components/Sidebar";
+import Main from "../components/Main";
 
 export default function Dashboard() {
   console.log("Rendering Dashboard");
@@ -15,10 +15,10 @@ export default function Dashboard() {
   };
 
   return (
-    <div className="w-full h-screen bg-gray-100 flex">
+    <div className="w-full h-screen flex">
       <Sidebar />
-      <div className="flex flex-1 flex-col bg-black">
-        <Header style={{height: '50%' }}/>
+      <div className="flex flex-1 flex-col bg-black h-full overflow-hidden">
+        <Header/>
         <Main />
       </div>
     </div>
