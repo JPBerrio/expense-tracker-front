@@ -1,5 +1,8 @@
-import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import React from "react";
+import { useNavigate } from "react-router-dom";
+import Header from "./Header";
+import Sidebar from "./Sidebar";
+import Main from "./Main";
 
 export default function Dashboard() {
   console.log("Rendering Dashboard");
@@ -10,13 +13,14 @@ export default function Dashboard() {
     localStorage.removeItem("jwtToken"); // Eliminar el token
     navigate("/"); // Navegar de vuelta al Login
   };
-  
+
   return (
-    <div style={{ padding: "20px", backgroundColor: "#f0f0f0" }}>
-      <h1>Dashboard Here</h1>
-      <p>Dashboard</p>
-      <button onClick={handleLogout}>cerrar sesion</button>
+    <div className="w-full h-screen bg-gray-100 flex">
+      <Sidebar />
+      <div className="flex flex-1 flex-col bg-black">
+        <Header style={{height: '50%' }}/>
+        <Main />
+      </div>
     </div>
   );
 }
-
