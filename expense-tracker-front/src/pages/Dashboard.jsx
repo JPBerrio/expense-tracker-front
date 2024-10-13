@@ -18,7 +18,7 @@ export default function Dashboard() {
 
   const handleLogout = () => {
     localStorage.removeItem("jwtToken"); // Eliminar el token
-    navigate("/"); // Navegar de vuelta al Login
+    navigate("/", { replace: true }); // Navegar de vuelta al Login sin recargar la página
   };
 
   const handleComponentChange = (component) => {
