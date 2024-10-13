@@ -46,7 +46,7 @@ export default function Dashboard() {
     <div className="w-full h-screen flex">
       <Sidebar onComponentChange={handleComponentChange}/>
       <div className="flex flex-1 flex-col h-full overflow-hidden">
-        <Header/>
+        <Header handleLogout={handleLogout}/>
         {renderComponent()}
       </div>
     </div>
