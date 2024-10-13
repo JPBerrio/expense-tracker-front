@@ -2,7 +2,7 @@ import { useState } from "react";
 import SignIn from "../components/SignIn";
 import SignUp from "../components/SignUp";
 import axios from "axios";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 
 export default function Login() {
   const [isLogin, setIsLogin] = useState(true);
@@ -12,7 +12,6 @@ export default function Login() {
   const [age, setAge] = useState("");
   const [phone, setPhone] = useState("");
   const [email, setEmail] = useState("");
-
   const navigate = useNavigate();
 
   const handleSignUp = async (e) => {
@@ -24,7 +23,7 @@ export default function Login() {
 
     try {
       const response = await axios.post(
-        "https://a3f2-2800-484-9a77-1000-acdb-9567-a951-642d.ngrok-free.app/api/users/register",
+        "https://af20-2800-484-9a77-1000-24b8-6ff9-a45f-3ca5.ngrok-free.app/api/users/register",
         {
           username,
           lastName,
@@ -47,37 +46,38 @@ export default function Login() {
 
   const handleLogin = async (e) => {
     e.preventDefault();
-    // Validar campos
     if (!username || !password) {
       alert("Completa todos los campos");
       return;
     }
-
+  
     try {
       const response = await axios.post(
-        "https://4752-190-71-20-66.ngrok-free.app/api/auth/login",
+        "https://af20-2800-484-9a77-1000-24b8-6ff9-a45f-3ca5.ngrok-free.app/api/auth/login",
         {
           username,
           password,
         }
       );
-
-      if (response.status === 200) {
-        alert("Inicio de sesión exitoso.");
-        const { token } = response.data; // Asumiendo que el token está en response.data
-        localStorage.setItem("jwtToken", token);
-        const isAuthenticated = () => {
-          return !!localStorage.getItem("jwtToken");
-        };
-        console.log("Token guardado:", token);
+  
+      console.log("Respuesta del servidor:", response); // Ver toda la respuesta
+  
+      const token = response.headers["authorization"]; // Obtiene el token del encabezado
+  
+      if (response.status === 200 && token) {
+        const actualToken = token.split(" ")[1]; // Obtener el token real
+        localStorage.setItem("jwtToken", actualToken);
+        console.log("Token guardado:", actualToken);
         navigate("/dashboard");
       } else {
-        alert("Error al iniciar sesión.");
+        alert("Error al iniciar sesión o no se recibió el token.");
       }
     } catch (error) {
-      alert("Error al iniciar sesión.");
+      console.error("Error al iniciar sesión:", error.response ? error.response.data : error.message);
+      alert("Error al iniciar sesión. Por favor verifica tus credenciales.");
     }
   };
+  
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100 bg-gradient-to-r from-indigo-500 from-10% via-sky-500 via-30% to-emerald-500 to-90%">
@@ -114,14 +114,12 @@ export default function Login() {
               />
             )}
           </div>
-          <div>
-            <button
-              type="submit"
-              className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-black hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-black"
-            >
-              {isLogin ? "Sign in" : "Sign up"}
-            </button>
-          </div>
+          <button
+            type="submit"
+            className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-black hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-black"
+          >
+            {isLogin ? "Sign in" : "Sign up"}
+          </button>
         </form>
         <div className="text-center">
           <button
