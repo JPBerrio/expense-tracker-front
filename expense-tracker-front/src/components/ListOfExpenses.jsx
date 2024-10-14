@@ -4,7 +4,7 @@ import ItemList from "./ItemList";
 import Pagination from "./Pagination";
 
 const API_URL =
-  "https://af20-2800-484-9a77-1000-24b8-6ff9-a45f-3ca5.ngrok-free.app/api/expenses";
+  "https://9b8d-2800-484-9a77-1000-ada8-3039-63b0-643c.ngrok-free.app/api/expenses";
 
 export default function ListOfExpenses() {
   const [items, setItems] = useState([]);
@@ -17,17 +17,24 @@ export default function ListOfExpenses() {
       try {
         const token = localStorage.getItem("jwtToken");
         console.log("Token:", token); // Verifica el token
-    
+
+        if (!token) {
+          console.error("Token no encontrado");
+          return;
+        }
+
         const response = await axios.get(
-          `${API_URL}?page=${currentPage}&size=${itemsPerPage}`,
+          `${API_URL}/${60}?page=${currentPage}&size=${itemsPerPage}`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
+              'Content-Type': 'application/json',
             },
           }
         );
-    
+
         console.log("Fetched items:", response.data);
+        console.log("Fetched items:", response.data.content);
         setItems(response.data.content);
         setTotalPages(response.data.totalPages);
       } catch (error) {
@@ -38,7 +45,8 @@ export default function ListOfExpenses() {
           console.error("Error fetching data:", error.message);
         }
       }
-    };    
+    };
+
     fetchData();
   }, [currentPage]);
 

@@ -23,7 +23,7 @@ export default function Login() {
 
     try {
       const response = await axios.post(
-        "https://af20-2800-484-9a77-1000-24b8-6ff9-a45f-3ca5.ngrok-free.app/api/users/register",
+        "https://9b8d-2800-484-9a77-1000-ada8-3039-63b0-643c.ngrok-free.app/api/users/register",
         {
           username,
           lastName,
@@ -50,20 +50,20 @@ export default function Login() {
       alert("Completa todos los campos");
       return;
     }
-  
+
     try {
       const response = await axios.post(
-        "https://af20-2800-484-9a77-1000-24b8-6ff9-a45f-3ca5.ngrok-free.app/api/auth/login",
+        "https://9b8d-2800-484-9a77-1000-ada8-3039-63b0-643c.ngrok-free.app/api/auth/login",
         {
           username,
           password,
         }
       );
-  
-      console.log("Respuesta del servidor:", response); // Ver toda la respuesta
-  
-      const token = response.headers["authorization"]; // Obtiene el token del encabezado
-  
+
+      console.log("Respuesta del servidor:", response.headers); // Ver toda la respuesta
+
+      const token = response.headers.get("Authorization");
+
       if (response.status === 200 && token) {
         const actualToken = token.split(" ")[1]; // Obtener el token real
         localStorage.setItem("jwtToken", actualToken);
@@ -77,7 +77,6 @@ export default function Login() {
       alert("Error al iniciar sesión. Por favor verifica tus credenciales.");
     }
   };
-  
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100 bg-gradient-to-r from-indigo-500 from-10% via-sky-500 via-30% to-emerald-500 to-90%">
