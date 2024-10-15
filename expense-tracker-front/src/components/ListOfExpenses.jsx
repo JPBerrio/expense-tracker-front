@@ -4,7 +4,7 @@ import ItemList from "./ItemList";
 import Pagination from "./Pagination";
 
 const API_URL =
-  "https://9b8d-2800-484-9a77-1000-ada8-3039-63b0-643c.ngrok-free.app/api/expenses";
+  "https://ffc4-190-71-20-66.ngrok-free.app/api/expenses";
 
 export default function ListOfExpenses() {
   const [items, setItems] = useState([]);
@@ -29,10 +29,13 @@ export default function ListOfExpenses() {
             headers: {
               Authorization: `Bearer ${token}`,
               'Content-Type': 'application/json',
+              'ngrok-skip-browser-warning': 'true',
             },
+            responseType: 'json',
           }
         );
 
+        console.log("Fetched items:", response);
         console.log("Fetched items:", response.data);
         console.log("Fetched items:", response.data.content);
         setItems(response.data.content);
