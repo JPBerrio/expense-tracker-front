@@ -14,15 +14,6 @@ export default function Dashboard() {
 
   const [currentComponent, setCurrentComponent] = useState("main");
 
-  const navigate = useNavigate();
-
-  const handleLogout = () => {
-    console.log("removiendo token " + localStorage.getItem("jwtToken"))
-    localStorage.removeItem("jwtToken"); // Eliminar el token
-    console.log("token removido exitosamente")
-    navigate("/", { replace: true }); // Navegar de vuelta al Login sin recargar la página
-  };
-
   const handleComponentChange = (component) => {
     setCurrentComponent(component);
   }
@@ -48,7 +39,7 @@ export default function Dashboard() {
     <div className="w-full h-screen flex">
       <Sidebar onComponentChange={handleComponentChange}/>
       <div className="flex flex-1 flex-col h-full overflow-hidden">
-        <Header handleLogout={handleLogout}/>
+        
         {renderComponent()}
       </div>
     </div>

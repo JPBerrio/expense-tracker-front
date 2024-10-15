@@ -2,7 +2,7 @@ import React from "react";
 
 function Pagination({ currentPage, totalPages, prevPage, nextPage }) {
   return (
-    <div className="flex justify-around items-center  bg-black w-[100%] h-[10%] align-self-center">
+    <div className="flex justify-center gap-8 items-center  bg-black w-[100%] h-[10%] align-self-center">
       <button
         onClick={prevPage}
         disabled={currentPage === 1}

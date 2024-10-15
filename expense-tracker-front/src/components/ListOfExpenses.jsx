@@ -24,7 +24,7 @@ export default function ListOfExpenses() {
         }
 
         const response = await axios.get(
-          `${API_URL}/${60}?page=${currentPage}&size=${itemsPerPage}`,
+          `${API_URL}?page=${currentPage}&size=${itemsPerPage}`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
