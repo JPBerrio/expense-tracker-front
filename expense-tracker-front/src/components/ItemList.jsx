@@ -2,7 +2,11 @@ import React from "react";
 import editar from "../assets/editar.png";
 import eliminar from "../assets/eliminar.png";
 
-function ItemList({ items=[] }) {
+const API_URL =
+  "https://83e1-2800-484-9a77-1000-8c44-9e9-b3c6-172d.ngrok-free.app/api/expenses";
+
+function ItemList({ items=[], onDelete }) {
+
   return (
     <div className="flex flex-wrap gap-4 justify-center h-[90%] bg-blue-400 w-[100%]">
       {items.map((item) => (
@@ -31,8 +35,8 @@ function ItemList({ items=[] }) {
                 <button className="font-semibold p-2 rounded ">
                   <img src={editar} className="h-6 w-6" alt="Editar" />
                 </button>
-                <button className="font-semibold p-2 rounded">
-                  <img src={eliminar} className="h-6 w-6" alt="Eliminar" />
+                <button className="font-semibold p-2 rounded" onClick={() => onDelete(item.idExpense)}>
+                  <img src={eliminar} className="h-6 w-6" alt="Eliminar"/>
                 </button>
               </div>
             </div>
