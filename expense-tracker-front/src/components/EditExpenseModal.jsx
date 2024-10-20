@@ -55,11 +55,11 @@ const EditExpenseModal = ({ isOpen, onClose, expense, onSave, categories }) => {
 
   return (
     <div
-      className="fixed inset-0 z-50 overflow-auto bg-black bg-opacity-40 flex items-center justify-center"
+      className="fixed inset-0 z-50 overflow-auto bg-black bg-opacity-40 flex items-center justify-center border-orange-700"
       onClick={handleOutsideClick}
     >
       <div
-        className="relative bg-white w-full max-w-md mx-auto rounded-lg shadow-lg p-6 space-y-6"
+        className="relative bg-white w-[35%] h-[75%] mx-auto rounded-lg shadow-lg p-6 space-y-6 border-2 border-rose-500"
         ref={modalRef}
       >
         <button

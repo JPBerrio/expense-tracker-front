@@ -18,12 +18,22 @@ export default function Dashboard() {
     setCurrentComponent(component);
   }
 
+  const categories = [
+    { idCategory: 1, nameCategory: "Groceries" },
+    { idCategory: 2, nameCategory: "Leisure" },
+    { idCategory: 3, nameCategory: "Electronics" },
+    { idCategory: 4, nameCategory: "Utilities" },
+    { idCategory: 5, nameCategory: "Clothing" },
+    { idCategory: 6, nameCategory: "Health" },
+    { idCategory: 7, nameCategory: "Others" },
+  ];
+
   const renderComponent = () => {
     switch (currentComponent) {
       case "main":
         return <Main />;
       case "add":
-        return <AddExpense />;
+        return <AddExpense categories={categories}/>;
       case "update":
         return <UpdateExpense />;
       case "remove":
