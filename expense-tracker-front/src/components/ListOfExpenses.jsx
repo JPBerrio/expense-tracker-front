@@ -4,10 +4,10 @@ import ItemList from "./ItemList";
 import Pagination from "./Pagination";
 import Loader from "./Loader";
 import { toast } from "sonner";
-import { confirmAlert } from "react-confirm-alert";
 import "react-confirm-alert/src/react-confirm-alert.css";
 import "../app.css";
 import EditExpenseModal from "./EditExpenseModal";
+import ConfirmationModal from "./ConfirmationModal";
 
 const API_URL =
   "https://d4fb-2800-484-9a06-7100-84ba-20a5-d53d-4148.ngrok-free.app/api/expenses";
@@ -18,7 +18,19 @@ export default function ListOfExpenses() {
   const [totalPages, setTotalPages] = useState(0);
   const [loading, setLoading] = useState(true);
   const [editExpense, setEditExpense] = useState(null);
+  const [expenseToDelete, setExpenseToDelete] = useState(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const itemsPerPage = 9;
+
+  const categories = [
+    { idCategory: 1, nameCategory: "Groceries" },
+    { idCategory: 2, nameCategory: "Leisure" },
+    { idCategory: 3, nameCategory: "Electronics" },
+    { idCategory: 4, nameCategory: "Utilities" },
+    { idCategory: 5, nameCategory: "Clothing" },
+    { idCategory: 6, nameCategory: "Health" },
+    { idCategory: 7, nameCategory: "Others" },
+  ];
 
   const fetchData = async (page) => {
     setLoading(true);
@@ -75,39 +87,39 @@ export default function ListOfExpenses() {
     }
   };
 
-  const deleteExpense = (id) => {
-    confirmAlert({
-      title: "Confirmar eliminación",
-      message: "¿Estás seguro de que quieres eliminar este gasto?",
-      buttons: [
-        {
-          label: "Sí",
-          onClick: async () => {
-            try {
-              const token = localStorage.getItem("jwtToken");
-              await axios.delete(`${API_URL}/${id}`, {
-                headers: {
-                  Authorization: `Bearer ${token}`,
-                  "Content-Type": "application/json",
-                },
-              });
+  const deleteExpense = async () => {
+    if (!expenseToDelete) return;
 
-              setItems((prevItems) =>
-                prevItems.filter((item) => item.idExpense !== id)
-              );
-              toast.success("Gasto eliminado correctamente!");
-            } catch (error) {
-              toast.error("Error al eliminar el gasto");
-              console.error("Error deleting expense:", error);
-            }
-          },
+    try {
+      const token = localStorage.getItem("jwtToken");
+      await axios.delete(`${API_URL}/${expenseToDelete}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
         },
-        {
-          label: "No",
-          onClick: () => {},
-        },
-      ],
-    });
+      });
+
+      setItems((prevItems) =>
+        prevItems.filter((item) => item.idExpense !== expenseToDelete)
+      );
+      toast.success("Gasto eliminado correctamente!");
+    } catch (error) {
+      toast.error("Error al eliminar el gasto");
+      console.error("Error deleting expense:", error);
+    } finally {
+      setIsModalOpen(false); // Cerrar el modal después de la eliminación
+      setExpenseToDelete(null); // Reiniciar el gasto a eliminar
+    }
+  };
+
+  const openDeleteModal = (id) => {
+    setExpenseToDelete(id);
+    setIsModalOpen(true);
+  };
+
+  const closeDeleteModal = () => {
+    setIsModalOpen(false);
+    setExpenseToDelete(null);
   };
 
   const openEditModal = (expense) => {
@@ -150,7 +162,7 @@ export default function ListOfExpenses() {
           <>
             <ItemList
               items={items}
-              onDelete={deleteExpense}
+              onDelete={openDeleteModal}
               onEdit={openEditModal}
             />
             <Pagination
@@ -164,6 +176,14 @@ export default function ListOfExpenses() {
               onClose={closeEditModal}
               expense={editExpense}
               onSave={saveExpense}
+              categories={categories}
+            />
+            <ConfirmationModal
+              isOpen={isModalOpen}
+              onClose={closeDeleteModal}
+              onConfirm={deleteExpense}
+              title="Confirmar eliminación"
+              message="¿Estás seguro de que quieres eliminar este gasto?"
             />
           </>
         )}
