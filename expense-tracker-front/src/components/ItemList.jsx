@@ -3,9 +3,9 @@ import editar from "../assets/editar.png";
 import eliminar from "../assets/eliminar.png";
 
 const API_URL =
-  "https://83e1-2800-484-9a77-1000-8c44-9e9-b3c6-172d.ngrok-free.app/api/expenses";
+  "https://d4fb-2800-484-9a06-7100-84ba-20a5-d53d-4148.ngrok-free.app/api/expenses";
 
-function ItemList({ items=[], onDelete }) {
+function ItemList({ items=[], onDelete, onEdit }) {
 
   return (
     <div className="flex flex-wrap gap-4 justify-center h-[90%] bg-blue-400 w-[100%]">
@@ -32,7 +32,7 @@ function ItemList({ items=[], onDelete }) {
                 {item.expenseCategoryEntity.nameCategory || "No especificada"}
               </p>
               <div className="text-gray-700 text-base flex justify-end gap-1  absolute bottom-2 right-2">
-                <button className="font-semibold p-2 rounded ">
+                <button className="font-semibold p-2 rounded " onClick={()=> onEdit(item)}>
                   <img src={editar} className="h-6 w-6" alt="Editar" />
                 </button>
                 <button className="font-semibold p-2 rounded" onClick={() => onDelete(item.idExpense)}>

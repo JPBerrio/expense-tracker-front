@@ -4,18 +4,20 @@ import ItemList from "./ItemList";
 import Pagination from "./Pagination";
 import Loader from "./Loader";
 import { toast } from "sonner";
-import {confirmAlert} from "react-confirm-alert";
-import 'react-confirm-alert/src/react-confirm-alert.css';
-import '../app.css'
+import { confirmAlert } from "react-confirm-alert";
+import "react-confirm-alert/src/react-confirm-alert.css";
+import "../app.css";
+import EditExpenseModal from "./EditExpenseModal";
 
 const API_URL =
-  "https://83e1-2800-484-9a77-1000-8c44-9e9-b3c6-172d.ngrok-free.app/api/expenses";
+  "https://d4fb-2800-484-9a06-7100-84ba-20a5-d53d-4148.ngrok-free.app/api/expenses";
 
 export default function ListOfExpenses() {
   const [items, setItems] = useState([]);
   const [currentPage, setCurrentPage] = useState(0);
   const [totalPages, setTotalPages] = useState(0);
   const [loading, setLoading] = useState(true);
+  const [editExpense, setEditExpense] = useState(null);
   const itemsPerPage = 9;
 
   const fetchData = async (page) => {
@@ -75,11 +77,11 @@ export default function ListOfExpenses() {
 
   const deleteExpense = (id) => {
     confirmAlert({
-      title: 'Confirmar eliminación',
-      message: '¿Estás seguro de que quieres eliminar este gasto?',
+      title: "Confirmar eliminación",
+      message: "¿Estás seguro de que quieres eliminar este gasto?",
       buttons: [
         {
-          label: 'Sí',
+          label: "Sí",
           onClick: async () => {
             try {
               const token = localStorage.getItem("jwtToken");
@@ -90,7 +92,9 @@ export default function ListOfExpenses() {
                 },
               });
 
-              setItems((prevItems) => prevItems.filter((item) => item.idExpense !== id));
+              setItems((prevItems) =>
+                prevItems.filter((item) => item.idExpense !== id)
+              );
               toast.success("Gasto eliminado correctamente!");
             } catch (error) {
               toast.error("Error al eliminar el gasto");
@@ -99,11 +103,42 @@ export default function ListOfExpenses() {
           },
         },
         {
-          label: 'No',
+          label: "No",
           onClick: () => {},
         },
       ],
     });
+  };
+
+  const openEditModal = (expense) => {
+    console.log("Expense to edit:", expense);
+    setEditExpense(expense);
+  };
+
+  const closeEditModal = () => {
+    console.log("Closing edit modal");
+    setEditExpense(null);
+  };
+
+  const saveExpense = async (id, updatedExpense) => {
+    try {
+      const token = localStorage.getItem("jwtToken");
+      await axios.put(`${API_URL}/${id}`, updatedExpense, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+      });
+      setItems((prevItems) =>
+        prevItems.map((item) =>
+          item.idExpense === id ? { ...item, ...updatedExpense } : item
+        )
+      );
+      toast.success("Gasto actualizado correctamente!");
+    } catch (error) {
+      toast.error("Error al actualizar el gasto");
+      console.error("Error updating expense:", error);
+    }
   };
 
   return (
@@ -113,12 +148,22 @@ export default function ListOfExpenses() {
           <Loader />
         ) : (
           <>
-            <ItemList items={items} onDelete={deleteExpense} />
+            <ItemList
+              items={items}
+              onDelete={deleteExpense}
+              onEdit={openEditModal}
+            />
             <Pagination
               currentPage={currentPage + 1}
               totalPages={totalPages}
               nextPage={nextPage}
               prevPage={prevPage}
+            />
+            <EditExpenseModal
+              isOpen={!!editExpense}
+              onClose={closeEditModal}
+              expense={editExpense}
+              onSave={saveExpense}
             />
           </>
         )}
