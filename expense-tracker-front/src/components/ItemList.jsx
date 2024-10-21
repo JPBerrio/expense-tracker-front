@@ -2,8 +2,6 @@ import React from "react";
 import editar from "../assets/editar.png";
 import eliminar from "../assets/eliminar.png";
 
-const API_URL =
-  "https://d4fb-2800-484-9a06-7100-84ba-20a5-d53d-4148.ngrok-free.app/api/expenses";
 
 function ItemList({ items=[], onDelete, onEdit }) {
 

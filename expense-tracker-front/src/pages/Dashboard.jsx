@@ -6,7 +6,7 @@ import Main from "../components/Main";
 import ListOfExpenses from "../components/ListOfExpenses";
 import UpdateExpense from "../components/UpdateExpense";
 import AddExpense from "../components/AddExpense";
-import RemoveExpense from "../components/RemoveExpense";
+import FilterExpense from "../components/FilterExpense";
 
 
 export default function Dashboard() {
@@ -36,8 +36,8 @@ export default function Dashboard() {
         return <AddExpense categories={categories}/>;
       case "update":
         return <UpdateExpense />;
-      case "remove":
-        return <RemoveExpense />;
+      case "filter":
+        return <FilterExpense />;
       case "list":
         return <ListOfExpenses />;
       default:

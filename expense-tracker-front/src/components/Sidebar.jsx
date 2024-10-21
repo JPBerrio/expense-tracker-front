@@ -20,7 +20,7 @@ function Sidebar({ onComponentChange }) {
       <Header handleLogout={handleLogout}/>
       <ButtonAside text="List and filter your expenses" onClick={()=>onComponentChange("list")}/>
       <ButtonAside text="Add a new expense" onClick={()=>onComponentChange("add")}/>
-      <ButtonAside text="Remove existing expenses" onClick={()=>onComponentChange("remove")}/>
+      <ButtonAside text="Filter your expenses" onClick={()=>onComponentChange("filter")}/>
       <ButtonAside text="Update existing expenses" onClick={()=>onComponentChange("update")}/>
       <ButtonAside text="Dashboard" onClick={()=>onComponentChange("main")}/>
     </aside>

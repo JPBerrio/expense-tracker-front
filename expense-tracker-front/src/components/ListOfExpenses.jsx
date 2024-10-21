@@ -10,7 +10,7 @@ import EditExpenseModal from "./EditExpenseModal";
 import ConfirmationModal from "./ConfirmationModal";
 
 const API_URL =
-  "https://d4fb-2800-484-9a06-7100-84ba-20a5-d53d-4148.ngrok-free.app/api/expenses";
+  "https://eb8f-2800-484-9a06-7100-d5f7-749d-102f-f1.ngrok-free.app/api/expenses";
 
 export default function ListOfExpenses() {
   const [items, setItems] = useState([]);
