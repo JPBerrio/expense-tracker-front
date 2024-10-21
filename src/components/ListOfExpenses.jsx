@@ -107,8 +107,8 @@ export default function ListOfExpenses() {
       toast.error("Error al eliminar el gasto");
       console.error("Error deleting expense:", error);
     } finally {
-      setIsModalOpen(false); // Cerrar el modal después de la eliminación
-      setExpenseToDelete(null); // Reiniciar el gasto a eliminar
+      setIsModalOpen(false);
+      setExpenseToDelete(null);
     }
   };
 

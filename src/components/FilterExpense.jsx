@@ -33,10 +33,10 @@ function FilterExpense() {
   };
 
   return (
-    <div>
+    <div className="h-[100%] w-[100%] bg-lime-500">
       <form
         onSubmit={handleSubmit}
-        className="max-w-md mx-auto p-6 bg-white rounded-lg shadow-md bg-lime-500	h-[35%] w-[35%]"
+        className="max-w-md mx-auto p-6 bg-white rounded-lg shadow-md h-[30%] w-[40%]"
       >
         <h2 className="text-2xl font-bold mb-4 text-gray-800">
           Selecciona una opción de fecha

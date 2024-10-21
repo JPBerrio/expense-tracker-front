@@ -10,9 +10,9 @@ function Sidebar({ onComponentChange }) {
 
   const handleLogout = () => {
     console.log("removiendo token " + localStorage.getItem("jwtToken"))
-    localStorage.removeItem("jwtToken"); // Eliminar el token
+    localStorage.removeItem("jwtToken");
     console.log("token removido exitosamente")
-    navigate("/", { replace: true }); // Navegar de vuelta al Login sin recargar la página
+    navigate("/", { replace: true });
   };
 
   return (
