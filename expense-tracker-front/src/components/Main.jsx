@@ -1,5 +1,5 @@
 import React from "react";
-import ExpenseCard from "./ExpenseCard";
+import ExpenseCard from "./ExpenseCard"
 import ExpenseGraphic from "./ExpenseGraphic";
 
 function Main() {
