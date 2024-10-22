@@ -1,12 +1,36 @@
-import { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Calendar } from "lucide-react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import ListOfExpenses from "./ListOfExpenses";
+import axios from "axios";
 
 function FilterExpense() {
   const [selectedOption, setSelectedOption] = useState("");
   const [dateRange, setDateRange] = useState([null, null]);
   const [startDate, endDate] = dateRange;
+  const [expenses, setExpenses] = useState([]);
+  const [loading, setLoading] = useState(false);
+
+  const fetchExpenses = async (url) => {
+    const token = localStorage.getItem("jwtToken");
+    try {
+      const response = await axios.get(url, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+          "ngrok-skip-browser-warning": "true",
+        },
+      });
+      console.log("Datos recibidos:", response.data);
+      setExpenses(response.data.content || []);
+      console.log("Gastos actualizados:", response.data.content || []);
+    } catch (error) {
+      console.error("Error fetching expenses:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const handleSelectChange = (event) => {
     setSelectedOption(event.target.value);
@@ -15,28 +39,44 @@ function FilterExpense() {
     }
   };
 
-  const handleCustomDateChange = (event) => {
-    setCustomDate(event.target.value);
-  };
-
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log("Opción seleccionada:", selectedOption);
-    if (selectedOption === "custom" && startDate && endDate) {
-      console.log(
-        "Rango de fechas:",
-        `${startDate.toISOString().split("T")[0]} - ${
-          endDate.toISOString().split("T")[0]
-        }`
-      );
+    console.log("Formulario enviado");
+    console.log("Selected Option:", selectedOption);
+    console.log("Date Range:", dateRange);
+    setLoading(true);
+
+    let url = "";
+    if (selectedOption === "lastWeek") {
+      url =
+        "https://0698-200-122-222-162.ngrok-free.app/api/expenses/users/last-week";
+      console.log("haciendo peticion a last week");
+    } else if (selectedOption === "lastMonth") {
+      url =
+        "https://0698-200-122-222-162.ngrok-free.app/api/expenses/users/last-month";
+    } else if (selectedOption === "lastThreeMonths") {
+      url =
+        "https://0698-200-122-222-162.ngrok-free.app/api/expenses/users/last-three-months";
+    } else if (selectedOption === "custom" && startDate && endDate) {
+      const startDateString = startDate.toISOString().split("T")[0];
+      const endDateString = endDate.toISOString().split("T")[0];
+      url = `https://0698-200-122-222-162.ngrok-free.app/api/expenses/users/filter?startDate=${startDateString}&endDate=${endDateString}`;
+    }
+
+    if (url) {
+      fetchExpenses(url);
+      console.log("Llamando a la API con URL:", url);
+    } else {
+      setLoading(false);
+      console.error("No valid selection made.");
     }
   };
 
   return (
-    <div className="h-[100%] w-[100%] bg-lime-500">
+    <div className="h-[100%] w-[100%] bg-lime-500 flex flex-col items-center justify-between">
       <form
         onSubmit={handleSubmit}
-        className="max-w-md mx-auto p-6 bg-white rounded-lg shadow-md h-[30%] w-[40%]"
+        className="p-4 bg-white rounded-lg shadow-md h-[25%] w-[40%] mb-4"
       >
         <h2 className="text-2xl font-bold mb-4 text-gray-800">
           Selecciona una opción de fecha
@@ -76,6 +116,9 @@ function FilterExpense() {
           Enviar
         </button>
       </form>
+      <section className="border-black border-2 h-[70%] w-[100%] overflow-auto">
+        {loading ? <p>Cargando...</p> : <ListOfExpenses expenses={expenses} />}
+      </section>
     </div>
   );
 }

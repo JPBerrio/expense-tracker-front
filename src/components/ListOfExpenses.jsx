@@ -10,13 +10,13 @@ import EditExpenseModal from "./EditExpenseModal";
 import ConfirmationModal from "./ConfirmationModal";
 
 const API_URL =
-  "https://eb8f-2800-484-9a06-7100-d5f7-749d-102f-f1.ngrok-free.app/api/expenses";
+  "https://0698-200-122-222-162.ngrok-free.app/api/expenses";
 
-export default function ListOfExpenses() {
+export default function ListOfExpenses({ expenses }) {
   const [items, setItems] = useState([]);
   const [currentPage, setCurrentPage] = useState(0);
   const [totalPages, setTotalPages] = useState(0);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [editExpense, setEditExpense] = useState(null);
   const [expenseToDelete, setExpenseToDelete] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -72,8 +72,14 @@ export default function ListOfExpenses() {
   };
 
   useEffect(() => {
-    fetchData(currentPage);
-  }, [currentPage]);
+    if (expenses && expenses.length > 0) {
+      setItems(expenses);
+      setTotalPages(Math.ceil(expenses.length / itemsPerPage));
+      console.log("Gastos establecidos:", expenses);
+    } else {
+      fetchData(currentPage);
+    }
+  }, [expenses, currentPage]);
 
   const nextPage = () => {
     if (currentPage < totalPages - 1) {
