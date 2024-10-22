@@ -108,7 +108,7 @@ export default function ListOfExpenses({ expenses }) {
       setItems((prevItems) =>
         prevItems.filter((item) => item.idExpense !== expenseToDelete)
       );
-      toast.success("Gasto eliminado correctamente!");
+      toast.success("Gasto eliminado correctamente!!");
     } catch (error) {
       toast.error("Error al eliminar el gasto");
       console.error("Error deleting expense:", error);
