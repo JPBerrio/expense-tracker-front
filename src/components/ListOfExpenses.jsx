@@ -142,7 +142,7 @@ function ListOfExpenses() {
     <div className="text-white w-[100%] bg-red-400 h-[100%] overflow-hidden flex-1 flex flex-col items-center justify-center">
       <form
         onSubmit={handleSubmit}
-        className="rounded-lg shadow-md w-[80%]  p-4 flex flex-row items-center justify-between gap-4 flex-wrap"
+        className="rounded-lg shadow-md w-[90%]  p-4 flex flex-row items-center justify-between gap-4 flex-nowrap"
       >
         <h2 className="font-bold text-gray-200 text-center">
           Selecciona una opción de fecha

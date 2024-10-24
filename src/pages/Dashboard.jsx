@@ -4,9 +4,7 @@ import Header from "../components/Header";
 import Sidebar from "../components/Sidebar";
 import Main from "../components/Main";
 import ListOfExpenses from "../components/ListOfExpenses";
-import UpdateExpense from "../components/UpdateExpense";
 import AddExpense from "../components/AddExpense";
-import FilterExpense from "../components/FilterExpense";
 
 
 export default function Dashboard() {
@@ -34,10 +32,6 @@ export default function Dashboard() {
         return <Main />;
       case "add":
         return <AddExpense categories={categories}/>;
-      case "update":
-        return <UpdateExpense />;
-      case "filter":
-        return <FilterExpense />;
       case "list":
         return <ListOfExpenses />;
       default:
