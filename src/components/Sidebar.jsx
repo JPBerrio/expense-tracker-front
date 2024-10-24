@@ -17,12 +17,13 @@ function Sidebar({ onComponentChange }) {
 
   return (
     <aside className="w-1/4 p-4 space-y-4 bg-emerald-500 flex flex-col justify-center items-center">
-      <Header handleLogout={handleLogout}/>
+      <Header />
       <ButtonAside text="List and filter your expenses" onClick={()=>onComponentChange("list")}/>
       <ButtonAside text="Add a new expense" onClick={()=>onComponentChange("add")}/>
       <ButtonAside text="Filter your expenses" onClick={()=>onComponentChange("filter")}/>
       <ButtonAside text="Update existing expenses" onClick={()=>onComponentChange("update")}/>
       <ButtonAside text="Dashboard" onClick={()=>onComponentChange("main")}/>
+      <ButtonAside text="Logout" onClick={handleLogout}/>
     </aside>
   );
 }

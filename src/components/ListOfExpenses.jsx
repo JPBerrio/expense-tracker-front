@@ -12,7 +12,7 @@ import ConfirmationModal from "./ConfirmationModal";
 
 const API_URL = "https://0698-200-122-222-162.ngrok-free.app/api/expenses";
 
-export default function ExpensesManager() {
+function ListOfExpenses() {
   const [items, setItems] = useState([]);
   const [currentPage, setCurrentPage] = useState(0);
   const [totalPages, setTotalPages] = useState(0);
@@ -100,7 +100,9 @@ export default function ExpensesManager() {
           "Content-Type": "application/json",
         },
       });
-      setItems((prevItems) => prevItems.filter((item) => item.idExpense !== expenseToDelete));
+      setItems((prevItems) =>
+        prevItems.filter((item) => item.idExpense !== expenseToDelete)
+      );
       toast.success("Gasto eliminado correctamente!");
     } catch (error) {
       toast.error("Error al eliminar el gasto");
@@ -125,7 +127,9 @@ export default function ExpensesManager() {
         },
       });
       setItems((prevItems) =>
-        prevItems.map((item) => (item.idExpense === id ? { ...item, ...updatedExpense } : item))
+        prevItems.map((item) =>
+          item.idExpense === id ? { ...item, ...updatedExpense } : item
+        )
       );
       toast.success("Gasto actualizado correctamente!");
     } catch (error) {
@@ -135,13 +139,19 @@ export default function ExpensesManager() {
   };
 
   return (
-    <div className="text-white w-[100%] bg-red-400 h-[100%] overflow-hidden flex-1">
-      <form onSubmit={handleSubmit} className=" bg-white rounded-lg shadow-md h-[20%] border-red-600 w-[50%]">
-        <h2 className="text-2xl font-bold mb-4 text-gray-800">Selecciona una opción de fecha</h2>
+    <div className="text-white w-[100%] bg-red-400 h-[100%] overflow-hidden flex-1 flex flex-col items-center justify-center">
+      <form
+        onSubmit={handleSubmit}
+        className="rounded-lg shadow-md w-[80%]  p-4 flex flex-row items-center justify-between gap-4 flex-wrap"
+      >
+        <h2 className="font-bold text-gray-200 text-center">
+          Selecciona una opción de fecha
+        </h2>
+
         <select
           value={selectedOption}
           onChange={(e) => setSelectedOption(e.target.value)}
-          className="w-full p-2 border border-gray-300 rounded-md "
+          className="flex-grow p-2 border border-gray-300 rounded-md bg-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500 min-w-[200px]"
         >
           <option value="">Selecciona una opción</option>
           <option value="lastWeek">Last Week</option>
@@ -149,8 +159,9 @@ export default function ExpensesManager() {
           <option value="lastThreeMonths">Last Three Months</option>
           <option value="custom">Custom Filter</option>
         </select>
+
         {selectedOption === "custom" && (
-          <div className="mb-4 relative">
+          <div className="relative flex-grow min-w-[200px]">
             <DatePicker
               selectsRange
               startDate={startDate}
@@ -159,28 +170,56 @@ export default function ExpensesManager() {
               isClearable
               placeholderText="Selecciona un rango de fechas"
               dateFormat="yyyy/MM/dd"
-              className="w-full border border-gray-300 rounded-md"
+              className="w-full p-2 pl-8 border border-gray-300 rounded-md bg-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
             <Calendar className="absolute left-2 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
           </div>
         )}
-        <button type="submit" className="w-full bg-blue-500 text-white py-2 rounded-md">
+
+        <button
+          type="submit"
+          className="bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 transition duration-200 whitespace-nowrap"
+        >
           Enviar
         </button>
       </form>
 
-      <div className="max-w-6xl mx-auto bg-green-800 rounded-lg shadow-lg overflow-hidden h-[80%] flex flex-col">
+      <div className="w-[100%] mx-auto bg-green-800 rounded-lg shadow-lg overflow-hidden h-[90%] flex flex-col">
         {loading ? (
           <Loader />
         ) : (
           <>
-            <ItemList items={items} onDelete={openDeleteModal} onEdit={openEditModal} />
-            <Pagination currentPage={currentPage + 1} totalPages={totalPages} nextPage={nextPage} prevPage={prevPage} />
-            <EditExpenseModal isOpen={!!editExpense} onClose={() => setEditExpense(null)} expense={editExpense} onSave={saveExpense} />
-            <ConfirmationModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} onConfirm={deleteExpense} title="Confirmar eliminación" message="¿Estás seguro de que quieres eliminar este gasto?" />
+            <ItemList
+              items={items}
+              onDelete={openDeleteModal}
+              onEdit={openEditModal}
+            />
+            {items.length > 0 && (
+              <Pagination
+                currentPage={currentPage + 1}
+                totalPages={totalPages}
+                nextPage={nextPage}
+                prevPage={prevPage}
+              />
+            )}
+            <EditExpenseModal
+              isOpen={!!editExpense}
+              onClose={() => setEditExpense(null)}
+              expense={editExpense}
+              onSave={saveExpense}
+            />
+            <ConfirmationModal
+              isOpen={isModalOpen}
+              onClose={() => setIsModalOpen(false)}
+              onConfirm={deleteExpense}
+              title="Confirmar eliminación"
+              message="¿Estás seguro de que quieres eliminar este gasto?"
+            />
           </>
         )}
       </div>
     </div>
   );
 }
+
+export default ListOfExpenses;

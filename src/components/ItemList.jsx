@@ -6,7 +6,9 @@ function ItemList({ items = [], onDelete, onEdit }) {
   return (
     <div className="flex flex-wrap gap-4 justify-center h-[90%] bg-blue-400 w-[100%]">
       {items.length === 0 ? (
-        <p>No hay gastos para mostrar</p>
+        <div className="flex items-center justify-center w-full h-full">
+          <p className="text-gray-500 text-lg">No hay gastos para mostrar</p>
+        </div>
       ) : (
         items.map((item) => (
           <div key={item.idExpense} className="h-[30%] w-[32%] relative">
