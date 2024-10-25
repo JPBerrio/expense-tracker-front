@@ -1,6 +1,8 @@
 import React from "react";
 import editar from "../assets/editar.png";
 import eliminar from "../assets/eliminar.png";
+import editIcon from "../assets/edit.svg";
+import deleteIcon from "../assets/delete.svg";
 
 function ItemList({ items = [], onDelete, onEdit }) {
   return (
@@ -37,13 +39,13 @@ function ItemList({ items = [], onDelete, onEdit }) {
                     className="font-semibold p-2 rounded "
                     onClick={() => onEdit(item)}
                   >
-                    <img src={editar} className="h-6 w-6" alt="Editar" />
+                    <img src={editIcon} className="h-7 w-7" alt="Editar" />
                   </button>
                   <button
                     className="font-semibold p-2 rounded"
                     onClick={() => onDelete(item.idExpense)}
                   >
-                    <img src={eliminar} className="h-6 w-6" alt="Eliminar" />
+                    <img src={deleteIcon} className="h-7 w-7" alt="Eliminar" />
                   </button>
                 </div>
               </div>

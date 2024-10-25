@@ -246,8 +246,8 @@ function ListOfExpenses() {
               isOpen={isModalOpen}
               onClose={() => setIsModalOpen(false)}
               onConfirm={deleteExpense}
-              title="Confirmar eliminación"
-              message="¿Estás seguro de que quieres eliminar este gasto?"
+              title="Confirm Deletion"
+              message="¿Are You Sure You Want to Delete This Expense?"
             />
           </>
         )}

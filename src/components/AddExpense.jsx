@@ -57,7 +57,7 @@ const AddExpense = ({ onCreate, categories }) => {
         <form onSubmit={handleSubmit} className="p-8 space-y-6">
           <div>
             <label htmlFor="expenseName" className="block text-sm font-medium text-[#1E1E1E] mb-2">
-              Nombre del gasto
+              Name of expense
             </label>
             <div className="relative rounded-md shadow-sm">
               <input
@@ -66,7 +66,7 @@ const AddExpense = ({ onCreate, categories }) => {
                 value={expenseName}
                 onChange={(e) => setExpenseName(e.target.value)}
                 className="block w-full pr-10 border-[#A6FF7D] focus:ring-[#07F062] focus:border-[#07F062] rounded-md bg-white text-[#1E1E1E] h-12 text-lg px-4"
-                placeholder="Ej: Compra de comestibles"
+                placeholder="Ex: Grocery shopping"
                 required
               />
               <div className="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
@@ -76,7 +76,7 @@ const AddExpense = ({ onCreate, categories }) => {
           </div>
           <div>
             <label htmlFor="expenditureAmount" className="block text-sm font-medium text-[#1E1E1E] mb-2">
-              Monto
+              Amount
             </label>
             <div className="relative rounded-md shadow-sm">
               <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
@@ -98,7 +98,7 @@ const AddExpense = ({ onCreate, categories }) => {
           </div>
           <div>
             <label htmlFor="expenseDate" className="block text-sm font-medium text-[#1E1E1E] mb-2">
-              Fecha
+              Date
             </label>
             <div className="relative rounded-md shadow-sm">
               <input
@@ -117,7 +117,7 @@ const AddExpense = ({ onCreate, categories }) => {
           </div>
           <div>
             <label htmlFor="expenseCategory" className="block text-sm font-medium text-[#1E1E1E] mb-2">
-              Categoría
+              Category
             </label>
             <select
               id="expenseCategory"
@@ -126,7 +126,7 @@ const AddExpense = ({ onCreate, categories }) => {
               className="block w-full pl-4 pr-10 py-2 text-[#1E1E1E] border-[#A6FF7D] focus:outline-none focus:ring-[#07F062] focus:border-[#07F062] rounded-md h-12 text-lg"
               required
             >
-              <option value="" disabled>Selecciona una categoría</option>
+              <option value="" disabled>Select Category</option>
               {categories.map((category) => (
                 <option key={category.idCategory} value={category.idCategory}>
                   {category.nameCategory}
