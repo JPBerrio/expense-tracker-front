@@ -11,8 +11,8 @@ function Main() {
         <ExpenseCard title="Categorías" />
       </div>
       <div className="flex justify-evenly items-center mb-6 h-1/2 bg-orange-500">
-        <ExpenseGraphic tittleGraphic="Gráfico últimos tres meses" />
-        <ExpenseGraphic tittleGraphic="Categorias con mas gastos" />
+        <ExpenseGraphic label="Expenses by Category" />
+        <ExpenseGraphic label="Expenses by Date" />
       </div>
     </main>
   );
