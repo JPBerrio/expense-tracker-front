@@ -9,8 +9,9 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import EditExpenseModal from "./EditExpenseModal";
 import ConfirmationModal from "./ConfirmationModal";
+import search from "../assets/search.svg";
 
-const API_URL = "https://0698-200-122-222-162.ngrok-free.app/api/expenses";
+const API_URL = "https://54f2-190-109-29-30.ngrok-free.app/api/expenses";
 
 function ListOfExpenses() {
   const [items, setItems] = useState([]);
@@ -24,6 +25,37 @@ function ListOfExpenses() {
   const [dateRange, setDateRange] = useState([null, null]);
   const [startDate, endDate] = dateRange;
   const itemsPerPage = 9;
+
+  const categories = [
+    {
+      idCategory: 1,
+      nameCategory: "Groceries",
+    },
+    {
+      idCategory: 2,
+      nameCategory: "Leisure",
+    },
+    {
+      idCategory: 3,
+      nameCategory: "Electronics",
+    },
+    {
+      idCategory: 4,
+      nameCategory: "Utilities",
+    },
+    {
+      idCategory: 5,
+      nameCategory: "Clothing",
+    },
+    {
+      idCategory: 6,
+      nameCategory: "Health",
+    },
+    {
+      idCategory: 7,
+      nameCategory: "Others",
+    },
+  ];
 
   const fetchExpenses = async (url) => {
     setLoading(true);
@@ -139,13 +171,13 @@ function ListOfExpenses() {
   };
 
   return (
-    <div className="text-white w-[100%] bg-red-400 h-[100%] overflow-hidden flex-1 flex flex-col items-center justify-center">
+    <div className=" w-[100%] bg-red-400 h-[100%] overflow-hidden flex-1 flex flex-col items-center justify-center">
       <form
         onSubmit={handleSubmit}
-        className="rounded-lg shadow-md w-[90%]  p-4 flex flex-row items-center justify-between gap-4 flex-nowrap"
+        className="rounded-lg shadow-md w-[80%]  p-4 flex flex-row items-center justify-between gap-4 flex-nowrap"
       >
         <h2 className="font-bold text-gray-200 text-center">
-          Selecciona una opción de fecha
+          Select a date option
         </h2>
 
         <select
@@ -153,7 +185,7 @@ function ListOfExpenses() {
           onChange={(e) => setSelectedOption(e.target.value)}
           className="flex-grow p-2 border border-gray-300 rounded-md bg-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500 min-w-[200px]"
         >
-          <option value="">Selecciona una opción</option>
+          <option value="">Select</option>
           <option value="lastWeek">Last Week</option>
           <option value="lastMonth">Last Month</option>
           <option value="lastThreeMonths">Last Three Months</option>
@@ -168,7 +200,7 @@ function ListOfExpenses() {
               endDate={endDate}
               onChange={(update) => setDateRange(update)}
               isClearable
-              placeholderText="Selecciona un rango de fechas"
+              placeholderText="Date range"
               dateFormat="yyyy/MM/dd"
               className="w-full p-2 pl-8 border border-gray-300 rounded-md bg-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
@@ -178,9 +210,10 @@ function ListOfExpenses() {
 
         <button
           type="submit"
-          className="bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 transition duration-200 whitespace-nowrap"
+          className="bg-stone-950 text-white py-2 px-4 rounded-md hover:bg-white hover:text-black transition duration-200 whitespace-nowrap flex items-center"
         >
-          Enviar
+          <img src={search} alt="search" className="mr-2 w-6 h-6" />
+          Search
         </button>
       </form>
 
@@ -207,6 +240,7 @@ function ListOfExpenses() {
               onClose={() => setEditExpense(null)}
               expense={editExpense}
               onSave={saveExpense}
+              categories={categories}
             />
             <ConfirmationModal
               isOpen={isModalOpen}

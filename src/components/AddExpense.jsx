@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { toast } from "sonner";
 import axios from "axios";
 import { CurrencyDollarIcon, CalendarIcon, FolderIcon, XCircleIcon } from "@heroicons/react/24/outline";
+import cancel from "../assets/cancel.svg"
+import save from "../assets/save.svg"
 
 const AddExpense = ({ onCreate, categories }) => {
   const [expenseName, setExpenseName] = useState("");
@@ -9,7 +11,7 @@ const AddExpense = ({ onCreate, categories }) => {
   const [expenseDate, setExpenseDate] = useState("");
   const [selectedCategory, setSelectedCategory] = useState(null);
 
-  const API_URL = "https://0698-200-122-222-162.ngrok-free.app/api/expenses"
+  const API_URL = "https://54f2-190-109-29-30.ngrok-free.app/api/expenses"
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -49,7 +51,7 @@ const AddExpense = ({ onCreate, categories }) => {
       <div className="bg-[#F9FFEF] w-[60%] h-[90%] mx-auto rounded-lg shadow-lg overflow-hidden border border-[#A6FF7D]">
         <div className="bg-[#07F062] p-4">
           <h2 className="text-2xl font-bold text-center text-[#1E1E1E]">
-            Crear Nuevo Gasto
+            Create new expense
           </h2>
         </div>
         <form onSubmit={handleSubmit} className="p-8 space-y-6">
@@ -143,15 +145,15 @@ const AddExpense = ({ onCreate, categories }) => {
               }}
               className="inline-flex items-center px-6 py-3 border border-[#A6FF7D] rounded-md shadow-sm text-base font-medium text-[#1E1E1E] bg-[#F9FFEF] hover:bg-[#FFF345] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#07F062] transition-colors duration-200"
             >
-              <XCircleIcon className="h-6 w-6 mr-2 text-[#1E1E1E]" aria-hidden="true" />
-              Limpiar
+              <img src={cancel} alt="Icon" className="h-6 w-6 mr-2 text-[#1E1E1E]" aria-hidden="true" />
+              Clear
             </button>
             <button
               type="submit"
-              className="inline-flex items-center px-6 py-3 border border-transparent rounded-md shadow-sm text-base font-medium text-[#1E1E1E] bg-[#07F062] hover:bg-[#A6FF7D] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#FFF345] transition-colors duration-200"
+              className="inline-flex items-center px-6 py-3 border border-transparent rounded-md shadow-sm text-base font-medium text-[#1E1E1E] bg-[black] hover:bg-[#A6FF7D] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#FFF345] transition-colors duration-200"
             >
-              
-              Guardar
+              <img src={save} alt="save" className="h-6 w-6 mr-2 text-[#1E1E1E]" aria-hidden="true" />
+              Save
             </button>
           </div>
         </form>
