@@ -10,8 +10,8 @@ import "react-datepicker/dist/react-datepicker.css";
 import EditExpenseModal from "./EditExpenseModal";
 import ConfirmationModal from "./ConfirmationModal";
 import search from "../assets/search.svg";
+import { API_URL } from "../constants";
 
-const API_URL = "https://54f2-190-109-29-30.ngrok-free.app/api/expenses";
 
 function ListOfExpenses() {
   const [items, setItems] = useState([]);
@@ -61,7 +61,7 @@ function ListOfExpenses() {
     setLoading(true);
     const token = localStorage.getItem("jwtToken");
     try {
-      const response = await axios.get(url, {
+      const response = await axios.get(API_URL, {
         headers: {
           Authorization: `Bearer ${token}`,
           "Content-Type": "application/json",

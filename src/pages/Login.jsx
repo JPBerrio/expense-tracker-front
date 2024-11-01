@@ -23,7 +23,7 @@ export default function Login() {
 
     try {
       const response = await axios.post(
-        "https://54f2-190-109-29-30.ngrok-free.app/api/users/register",
+        "https://8fbe-190-109-4-228.ngrok-free.app/api/users/register",
         {
           username,
           lastName,
@@ -53,7 +53,7 @@ export default function Login() {
 
     try {
       const response = await axios.post(
-        "https://54f2-190-109-29-30.ngrok-free.app/api/auth/login",
+        "https://8fbe-190-109-4-228.ngrok-free.app/api/auth/login",
         {
           username,
           password,

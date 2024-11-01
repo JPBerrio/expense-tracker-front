@@ -22,7 +22,7 @@ ChartJS.register(
 );
 
 const API_URL =
-  "https://54f2-190-109-29-30.ngrok-free.app/api/expenses?fetchAll=true";
+  "https://8fbe-190-109-4-228.ngrok-free.app/api/expenses?fetchAll=true";
 const ExpenseGraphic = ({ label }) => {
   const [chartData, setChartData] = useState({});
   const [chartOptions, setChartOptions] = useState({});
@@ -66,7 +66,6 @@ const ExpenseGraphic = ({ label }) => {
               .reduce((acc, exp) => acc + exp.expenditureAmount, 0) || 0
         );
       } else if (label === "Expenses by Date") {
-
         const expensesByDate = {};
 
         filteredExpenses.forEach((exp) => {

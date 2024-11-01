@@ -18,11 +18,11 @@ function Sidebar({ onComponentChange }) {
   };
 
   return (
-    <aside className="w-1/4 bg-emerald-500 flex flex-col justify-around items-center">
+    <aside className="w-1/5 bg-emerald-500 flex flex-col justify-around items-center">
       <Header />
       <div className="bg-red-400 h-[30%] w-[100%] flex flex-col justify-around items-center">
         <ButtonAside
-          text="List and filter your expenses"
+          text="List and filter"
           onClick={() => onComponentChange("list")}
           img={filter}
         />

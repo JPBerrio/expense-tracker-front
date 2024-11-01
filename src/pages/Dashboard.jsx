@@ -5,6 +5,7 @@ import Sidebar from "../components/Sidebar";
 import Main from "../components/Main";
 import ListOfExpenses from "../components/ListOfExpenses";
 import AddExpense from "../components/AddExpense";
+import { PieChart } from "lucide-react";
 
 
 export default function Dashboard() {
