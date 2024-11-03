@@ -57,7 +57,7 @@ function ListOfExpenses() {
     },
   ];
 
-  const fetchExpenses = async (url) => {
+  const fetchExpenses = async (API_URL) => {
     setLoading(true);
     const token = localStorage.getItem("jwtToken");
     try {
@@ -69,7 +69,7 @@ function ListOfExpenses() {
         },
       });
       setItems(response.data.content || []);
-      setTotalPages(Math.ceil(response.data.totalPages || 0));
+      setTotalPages(response.data.totalPages || 0);
       toast.success("Datos cargados exitosamente");
     } catch (error) {
       console.error("Error fetching expenses:", error);
@@ -79,7 +79,7 @@ function ListOfExpenses() {
   };
 
   useEffect(() => {
-    const url = `${API_URL}?page=${currentPage}&size=${itemsPerPage}`;
+    const url = `${API_URL}?page=${currentPage}&size=${itemsPerPage}&fetchAll=false`;
     fetchExpenses(url);
   }, [currentPage]);
 
@@ -171,19 +171,19 @@ function ListOfExpenses() {
   };
 
   return (
-    <div className=" w-[100%] bg-red-400 h-[100%] overflow-hidden flex-1 flex flex-col items-center justify-center">
+    <div className=" w-[100%] h-[100%] overflow-hidden flex-1 flex flex-col items-center justify-center bg-gray-950 ">
       <form
         onSubmit={handleSubmit}
-        className="rounded-lg shadow-md w-[80%]  p-4 flex flex-row items-center justify-between gap-4 flex-nowrap"
+        className="rounded-lg shadow-[0_0_10px_rgba(255,255,255,0.2)] w-[80%] p-4 flex flex-row items-center justify-between gap-4 flex-nowrap border border-transparent"
       >
-        <h2 className="font-bold text-gray-200 text-center">
+        <h2 className="font-bold text-white text-center">
           Select a date option
         </h2>
 
         <select
           value={selectedOption}
           onChange={(e) => setSelectedOption(e.target.value)}
-          className="flex-grow p-2 border border-gray-300 rounded-md bg-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500 min-w-[200px]"
+          className="flex-grow p-2 border border-gray-300 rounded-md bg-gray-100 focus:outline-none focus:ring-0 focus:border-[#2C333D] min-w-[200px]"
         >
           <option value="">Select</option>
           <option value="lastWeek">Last Week</option>
@@ -210,14 +210,14 @@ function ListOfExpenses() {
 
         <button
           type="submit"
-          className="bg-stone-950 text-white py-2 px-4 rounded-md hover:bg-white hover:text-black transition duration-200 whitespace-nowrap flex items-center"
+          className="border-gray-400 text-white py-2 px-4 rounded-md hover:bg-gray-300 hover:text-black transition duration-200 whitespace-nowrap flex items-center"
         >
           <img src={search} alt="search" className="mr-2 w-6 h-6" />
           Search
         </button>
       </form>
 
-      <div className="w-[100%] mx-auto bg-green-800 rounded-lg shadow-lg overflow-hidden h-[90%] flex flex-col">
+      <div className="w-[100%] mx-auto rounded-lg shadow-lg overflow-hidden h-[90%] flex flex-col">
         {loading ? (
           <Loader />
         ) : (

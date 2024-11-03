@@ -1,10 +1,13 @@
 import React from "react";
 
 function Header() {
+
+  const username = localStorage.getItem("username");
+
   return (
-    <header className="bg-amber-400 p-4 flex flex-col justify-around items-center h-[40%] w-6/10">
+    <header className="p-4 flex flex-col justify-around items-center h-[40%] w-6/10 text-green-500">
       <h1 className="text-2xl font-bold italic">Expense Tracker</h1>
-      <h2 className="text-2xl font-bold">Welcome Back don user username  {"{Username}"}</h2>
+      <h2 className="text-2xl font-bold">Welcome Back {username || "Username"}</h2>
     </header>
   );
 }

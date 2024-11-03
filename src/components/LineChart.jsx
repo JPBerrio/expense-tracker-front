@@ -7,21 +7,20 @@ Chart.register(LineElement, PointElement, LinearScale, Title, Tooltip, Legend);
 
 const LineChart = () => {
   const [data, setData] = useState({});
-  const API_URL = "https://8fbe-190-109-4-228.ngrok-free.app/api/expenses?fetchAll=true"; // Asegúrate de usar tu API aquí
+  const API_URL = "https://b135-181-58-39-178.ngrok-free.app/api/expenses?fetchAll=true";
 
   const fetchData = async () => {
-    const token = localStorage.getItem("jwtToken"); // Obtén el token JWT del almacenamiento local
+    const token = localStorage.getItem("jwtToken");
     try {
       const response = await axios.get(API_URL, {
         headers: {
-          Authorization: `Bearer ${token}`, // Agrega el token en el encabezado
+          Authorization: `Bearer ${token}`,
           "Content-Type": "application/json",
           "ngrok-skip-browser-warning": "true",
         },
       });
       const expenses = response.data;
 
-      // Procesa los datos para el gráfico de línea
       const dates = [...new Set(expenses.map(exp => exp.expenseDate))];
       const amounts = dates.map(date =>
         expenses.filter(exp => exp.expenseDate === date)
@@ -34,8 +33,8 @@ const LineChart = () => {
           label: 'Gastos por Fecha',
           data: amounts,
           fill: false,
-          borderColor: '#36A2EB',
-          tension: 0.1, // Suaviza la línea
+          borderColor: '#2ecc71',
+          tension: 0.1,
         }],
       });
     } catch (error) {

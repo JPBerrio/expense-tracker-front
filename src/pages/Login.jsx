@@ -23,7 +23,7 @@ export default function Login() {
 
     try {
       const response = await axios.post(
-        "https://8fbe-190-109-4-228.ngrok-free.app/api/users/register",
+        "https://b135-181-58-39-178.ngrok-free.app/api/users/register",
         {
           username,
           lastName,
@@ -53,7 +53,7 @@ export default function Login() {
 
     try {
       const response = await axios.post(
-        "https://8fbe-190-109-4-228.ngrok-free.app/api/auth/login",
+        "https://b135-181-58-39-178.ngrok-free.app/api/auth/login",
         {
           username,
           password,
@@ -68,6 +68,7 @@ export default function Login() {
         const actualToken = token.split(" ")[1]; // Obtener el token real
         localStorage.setItem("jwtToken", actualToken);
         console.log("Token guardado:", actualToken);
+        localStorage.setItem("username", username);
         navigate("/dashboard");
       } else {
         alert("Error al iniciar sesión o no se recibió el token.");

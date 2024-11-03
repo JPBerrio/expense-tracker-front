@@ -18,9 +18,9 @@ function Sidebar({ onComponentChange }) {
   };
 
   return (
-    <aside className="w-1/5 bg-emerald-500 flex flex-col justify-around items-center">
+    <aside className="w-1/5  flex flex-col justify-around items-center bg-gray-950">
       <Header />
-      <div className="bg-red-400 h-[30%] w-[100%] flex flex-col justify-around items-center">
+      <div className=" h-[30%] w-[100%] flex flex-col justify-around items-center">
         <ButtonAside
           text="List and filter"
           onClick={() => onComponentChange("list")}

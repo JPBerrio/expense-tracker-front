@@ -11,7 +11,7 @@ const AddExpense = ({ onCreate, categories }) => {
   const [expenseDate, setExpenseDate] = useState("");
   const [selectedCategory, setSelectedCategory] = useState(null);
 
-  const API_URL = "https://54f2-190-109-29-30.ngrok-free.app/api/expenses"
+  const API_URL = "https://b135-181-58-39-178.ngrok-free.app/api/expenses"
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -47,16 +47,16 @@ const AddExpense = ({ onCreate, categories }) => {
   };
 
   return (
-    <section className="w-[100%] h-[100%] flex items-center justify-center bg-[#030400]">
-      <div className="bg-[#F9FFEF] w-[60%] h-[90%] mx-auto rounded-lg shadow-lg overflow-hidden border border-[#A6FF7D]">
-        <div className="bg-[#07F062] p-4">
-          <h2 className="text-2xl font-bold text-center text-[#1E1E1E]">
+    <section className="w-[100%] h-[100%] flex items-center justify-center bg-gray-950 ">
+      <div className="bg-white bg-opacity-30 backdrop-blur-md w-[50%] h-[90%] mx-auto rounded-lg shadow-lg overflow-hidden border ">
+        <div className="p-2">
+          <h2 className="text-2xl font-bold text-center text-black">
             Create new expense
           </h2>
         </div>
         <form onSubmit={handleSubmit} className="p-8 space-y-6">
           <div>
-            <label htmlFor="expenseName" className="block text-sm font-medium text-[#1E1E1E] mb-2">
+            <label htmlFor="expenseName" className="block text-s font-bold text-black mb-2">
               Name of expense
             </label>
             <div className="relative rounded-md shadow-sm">
@@ -69,13 +69,10 @@ const AddExpense = ({ onCreate, categories }) => {
                 placeholder="Ex: Grocery shopping"
                 required
               />
-              <div className="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
-                <FolderIcon className="h-6 w-6 text-[#A6FF7D]" aria-hidden="true" />
-              </div>
             </div>
           </div>
           <div>
-            <label htmlFor="expenditureAmount" className="block text-sm font-medium text-[#1E1E1E] mb-2">
+            <label htmlFor="expenditureAmount" className="block text-s font-bold text-black mb-2">
               Amount
             </label>
             <div className="relative rounded-md shadow-sm">
@@ -91,13 +88,10 @@ const AddExpense = ({ onCreate, categories }) => {
                 placeholder="0.00"
                 required
               />
-              <div className="absolute inset-y-0 right-0 flex items-center">
-                <CurrencyDollarIcon className="h-6 w-6 text-[#A6FF7D] mr-4" aria-hidden="true" />
-              </div>
             </div>
           </div>
           <div>
-            <label htmlFor="expenseDate" className="block text-sm font-medium text-[#1E1E1E] mb-2">
+            <label htmlFor="expenseDate" className="block text-s font-bold text-black mb-2">
               Date
             </label>
             <div className="relative rounded-md shadow-sm">
@@ -110,13 +104,10 @@ const AddExpense = ({ onCreate, categories }) => {
                 className="block w-full pr-10 border-[#A6FF7D] focus:ring-[#07F062] focus:border-[#07F062] rounded-md bg-white text-[#1E1E1E] h-12 text-lg px-4"
                 required
               />
-              <div className="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
-                <CalendarIcon className="h-6 w-6 text-[#A6FF7D]" aria-hidden="true" />
-              </div>
             </div>
           </div>
           <div>
-            <label htmlFor="expenseCategory" className="block text-sm font-medium text-[#1E1E1E] mb-2">
+            <label htmlFor="expenseCategory" className="block text-s font-bold text-black mb-2">
               Category
             </label>
             <select
@@ -143,14 +134,14 @@ const AddExpense = ({ onCreate, categories }) => {
                 setExpenseDate("");
                 setSelectedCategory(null);
               }}
-              className="inline-flex items-center px-6 py-3 border border-[#A6FF7D] rounded-md shadow-sm text-base font-medium text-[#1E1E1E] bg-[#F9FFEF] hover:bg-[#FFF345] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#07F062] transition-colors duration-200"
+              className="inline-flex items-center px-6 py-3 border border-gray-400 text-white hover:bg-gray-300 hover:text-black font-bold py-2 px-4 rounded disabled:opacity-50 disabled:cursor-not-allowed"
             >
               <img src={cancel} alt="Icon" className="h-6 w-6 mr-2 text-[#1E1E1E]" aria-hidden="true" />
               Clear
             </button>
             <button
               type="submit"
-              className="inline-flex items-center px-6 py-3 border border-transparent rounded-md shadow-sm text-base font-medium text-[#1E1E1E] bg-[black] hover:bg-[#A6FF7D] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#FFF345] transition-colors duration-200"
+              className="inline-flex items-center px-6 py-3 border border-gray-400 text-white hover:bg-gray-300 hover:text-black font-bold py-2 px-4 rounded disabled:opacity-50 disabled:cursor-not-allowed"
             >
               <img src={save} alt="save" className="h-6 w-6 mr-2 text-[#1E1E1E]" aria-hidden="true" />
               Save

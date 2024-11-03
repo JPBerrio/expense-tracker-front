@@ -22,7 +22,7 @@ ChartJS.register(
 );
 
 const API_URL =
-  "https://8fbe-190-109-4-228.ngrok-free.app/api/expenses?fetchAll=true";
+  "https://b135-181-58-39-178.ngrok-free.app/api/expenses?fetchAll=true";
 const ExpenseGraphic = ({ label }) => {
   const [chartData, setChartData] = useState({});
   const [chartOptions, setChartOptions] = useState({});
@@ -41,11 +41,11 @@ const ExpenseGraphic = ({ label }) => {
       const expenses = response.data;
       console.log(response.data);
       const currentDate = new Date();
-      const lastThreeMonthsAgo = new Date(
-        currentDate.setMonth(currentDate.getMonth() - 3)
+      const lastMonth = new Date(
+        currentDate.setMonth(currentDate.getMonth() - 1)
       );
       const filteredExpenses = expenses.filter(
-        (exp) => new Date(exp.expenseDate) >= lastThreeMonthsAgo
+        (exp) => new Date(exp.expenseDate) >= lastMonth
       );
       console.log("Filtered Expenses:", filteredExpenses);
 
@@ -82,13 +82,23 @@ const ExpenseGraphic = ({ label }) => {
 
       const maxValue = Math.max(...data);
 
+      const colors = [
+        "#2ecc71",
+        "#27ae60",
+        "#B6F25C",
+        "#95a5a6",
+        "#34495e",
+        "#2c3e50",
+        "#1a1a1a",
+      ];
+
       setChartData({
         labels: categories,
         datasets: [
           {
             label: label,
             data: data,
-            backgroundColor: "rgba(75, 192, 192, 0.5)",
+            backgroundColor: colors.slice(0, data.length),
           },
         ],
       });
@@ -111,7 +121,7 @@ const ExpenseGraphic = ({ label }) => {
   }, [label]);
 
   return (
-    <div className="bg-white  rounded-lg shadow border border-gray-300 w-[47%] flex items-center justify-center h-3/4">
+    <div className="bg-white bg-opacity-10 backdrop-blur-md rounded-lg shadow border border-gray-300 w-[47%] flex items-center justify-center h-3/4">
       {chartData.labels ? (
         <Bar data={chartData} options={{ chartOptions }} />
       ) : (

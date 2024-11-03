@@ -7,21 +7,20 @@ Chart.register(BarElement, CategoryScale, LinearScale, Tooltip, Legend);
 
 const StackedBarChart = () => {
   const [data, setData] = useState({});
-  const API_URL = "https://8fbe-190-109-4-228.ngrok-free.app/api/expenses?fetchAll=true"; // Asegúrate de usar tu API aquí
+  const API_URL = "https://b135-181-58-39-178.ngrok-free.app/api/expenses?fetchAll=true";
 
   const fetchData = async () => {
-    const token = localStorage.getItem("jwtToken"); // Obtén el token JWT del almacenamiento local
+    const token = localStorage.getItem("jwtToken");
     try {
       const response = await axios.get(API_URL, {
         headers: {
-          Authorization: `Bearer ${token}`, // Agrega el token en el encabezado
+          Authorization: `Bearer ${token}`,
           "Content-Type": "application/json",
           "ngrok-skip-browser-warning": "true",
         },
       });
       const expenses = response.data;
 
-      // Procesa los datos para el gráfico de barras apiladas
       const categories = [...new Set(expenses.map(exp => exp.expenseCategoryEntity.nameCategory))];
       const monthlyData = {};
 
@@ -38,10 +37,11 @@ const StackedBarChart = () => {
       });
 
       const labels = Object.keys(monthlyData);
-      const datasets = categories.map(category => ({
+      const colors = ["#2ecc71", "#27ae60", "#ecf0f1", "#95a5a6", "#34495e", "#2c3e50", "#1a1a1a"];
+      const datasets = categories.map((category, index) => ({
         label: category,
         data: labels.map(month => monthlyData[month][category] || 0),
-        backgroundColor: '#FFCE56', // Cambia el color si es necesario
+        backgroundColor: colors[index % colors.length],
       }));
 
       setData({
@@ -64,10 +64,10 @@ const StackedBarChart = () => {
           data={data}
           options={{
             scales: {
-              x: { stacked: true },
+              x: { stacked: false },
               y: { stacked: true },
             },
-            maintainAspectRatio: false, // Mantiene la proporción al redimensionar
+            maintainAspectRatio: false,
           }}
         />
       ) : (

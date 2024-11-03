@@ -7,7 +7,7 @@ import StackedBarChart from "./StackedBarChart";
 
 function Main() {
   return (
-    <main className=" w-7/10 bg-white overflow-hidden flex-1 bg-teal-800">
+    <main className=" w-7/10 bg-gray-950 overflow-hidden flex-1 bg-teal-800">
       <div className="flex justify-evenly items-center  h-1/2">
         <ExpenseCard
           title="Últimos gastos"

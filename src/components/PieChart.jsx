@@ -2,23 +2,22 @@
 import React, { useEffect, useState, useRef } from "react";
 import { Pie } from "react-chartjs-2";
 import axios from "axios";
-import { Chart, ArcElement, Tooltip, Legend } from "chart.js"; // Importa los elementos necesarios
+import { Chart, ArcElement, Tooltip, Legend } from "chart.js";
 
 Chart.register(ArcElement, Tooltip, Legend);
 
 const PieChart = () => {
   const [data, setData] = useState({});
   const API_URL =
-    "https://8fbe-190-109-4-228.ngrok-free.app/api/expenses?fetchAll=true";
-  const canvasRef = useRef(null);
+    "https://b135-181-58-39-178.ngrok-free.app/api/expenses?fetchAll=true";
 
   const fetchData = async () => {
-    const token = localStorage.getItem("jwtToken"); // Obtén el token JWT del almacenamiento local
+    const token = localStorage.getItem("jwtToken");
     console.log("funciona");
     try {
       const response = await axios.get(API_URL, {
         headers: {
-          Authorization: `Bearer ${token}`, // Agrega el token en el encabezado
+          Authorization: `Bearer ${token}`,
           "Content-Type": "application/json",
           "ngrok-skip-browser-warning": "true",
         },
@@ -26,7 +25,6 @@ const PieChart = () => {
       const expenses = response.data;
       console.log("Response data:", expenses);
 
-      // Procesa los datos como lo hiciste en ExpenseGraphic
       const categories = [
         ...new Set(
           expenses.map((exp) => exp.expenseCategoryEntity.nameCategory)
@@ -40,7 +38,7 @@ const PieChart = () => {
 
       if (categories.length === 0 || dataByCategory.length === 0) {
         console.warn("No hay datos para mostrar en el gráfico.");
-        return; // Salir si no hay datos
+        return;
       }
 
       setData({
@@ -48,7 +46,7 @@ const PieChart = () => {
         datasets: [
           {
             data: dataByCategory,
-            backgroundColor: ["#FF6384", "#36A2EB", "#FFCE56"],
+            backgroundColor: ["#2ecc71", "#27ae60", "#ecf0f1", "#95a5a6", "#34495e", "#2c3e50", "#1a1a1a"],
           },
         ],
       });
