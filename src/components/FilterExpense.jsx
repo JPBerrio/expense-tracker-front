@@ -49,18 +49,18 @@ function FilterExpense() {
     let url = "";
     if (selectedOption === "lastWeek") {
       url =
-        "https://b135-181-58-39-178.ngrok-free.app/api/expenses/users/last-week";
+        "https://expense-tracker-api-jsmc.onrender.com/api/expenses/users/last-week";
       console.log("haciendo peticion a last week");
     } else if (selectedOption === "lastMonth") {
       url =
-        "https://b135-181-58-39-178.ngrok-free.app/api/expenses/users/last-month";
+        "https://expense-tracker-api-jsmc.onrender.com/api/expenses/users/last-month";
     } else if (selectedOption === "lastThreeMonths") {
       url =
-        "https://b135-181-58-39-178.ngrok-free.app/api/expenses/users/last-three-months";
+        "https://expense-tracker-api-jsmc.onrender.com/api/expenses/users/last-three-months";
     } else if (selectedOption === "custom" && startDate && endDate) {
       const startDateString = startDate.toISOString().split("T")[0];
       const endDateString = endDate.toISOString().split("T")[0];
-      url = `https://b135-181-58-39-178.ngrok-free.app/api/expenses/users/filter?startDate=${startDateString}&endDate=${endDateString}`;
+      url = `https://expense-tracker-api-jsmc.onrender.com/api/expenses/users/filter?startDate=${startDateString}&endDate=${endDateString}`;
     }
 
     if (url) {

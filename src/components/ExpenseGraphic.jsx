@@ -22,7 +22,7 @@ ChartJS.register(
 );
 
 const API_URL =
-  "https://b135-181-58-39-178.ngrok-free.app/api/expenses?fetchAll=true";
+  "https://expense-tracker-api-jsmc.onrender.com/api/expenses?fetchAll=true";
 const ExpenseGraphic = ({ label }) => {
   const [chartData, setChartData] = useState({});
   const [chartOptions, setChartOptions] = useState({});

@@ -23,7 +23,7 @@ export default function Login() {
 
     try {
       const response = await axios.post(
-        "https://b135-181-58-39-178.ngrok-free.app/api/users/register",
+        "https://expense-tracker-api-jsmc.onrender.com/api/users/register",
         {
           username,
           lastName,
@@ -53,7 +53,7 @@ export default function Login() {
 
     try {
       const response = await axios.post(
-        "https://b135-181-58-39-178.ngrok-free.app/api/auth/login",
+        "https://expense-tracker-api-jsmc.onrender.com/api/auth/login",
         {
           username,
           password,

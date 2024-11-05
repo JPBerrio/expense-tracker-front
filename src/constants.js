@@ -1,1 +1,1 @@
-export const API_URL = "https://b135-181-58-39-178.ngrok-free.app/api/expenses"
+export const API_URL = "https://expense-tracker-api-jsmc.onrender.com/api/expenses"

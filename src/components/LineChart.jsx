@@ -7,7 +7,7 @@ Chart.register(LineElement, PointElement, LinearScale, Title, Tooltip, Legend);
 
 const LineChart = () => {
   const [data, setData] = useState({});
-  const API_URL = "https://b135-181-58-39-178.ngrok-free.app/api/expenses?fetchAll=true";
+  const API_URL = "https://expense-tracker-api-jsmc.onrender.com/api/expenses?fetchAll=true";
 
   const fetchData = async () => {
     const token = localStorage.getItem("jwtToken");

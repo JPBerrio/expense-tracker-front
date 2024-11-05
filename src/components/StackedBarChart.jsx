@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { Bar } from "react-chartjs-2";
 import axios from "axios";
-import { Chart, BarElement, CategoryScale, LinearScale, Tooltip, Legend } from "chart.js"; // Importa los elementos necesarios
+import { Chart, BarElement, CategoryScale, LinearScale, Tooltip, Legend } from "chart.js";
 
 Chart.register(BarElement, CategoryScale, LinearScale, Tooltip, Legend);
 
 const StackedBarChart = () => {
   const [data, setData] = useState({});
-  const API_URL = "https://b135-181-58-39-178.ngrok-free.app/api/expenses?fetchAll=true";
+  const API_URL = "https://expense-tracker-api-jsmc.onrender.com/api/expenses?fetchAll=true";
 
   const fetchData = async () => {
     const token = localStorage.getItem("jwtToken");

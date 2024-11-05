@@ -9,7 +9,7 @@ Chart.register(ArcElement, Tooltip, Legend);
 const PieChart = () => {
   const [data, setData] = useState({});
   const API_URL =
-    "https://b135-181-58-39-178.ngrok-free.app/api/expenses?fetchAll=true";
+    "https://expense-tracker-api-jsmc.onrender.com/api/expenses?fetchAll=true";
 
   const fetchData = async () => {
     const token = localStorage.getItem("jwtToken");

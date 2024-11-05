@@ -18,7 +18,7 @@ function Sidebar({ onComponentChange }) {
   };
 
   return (
-    <aside className="w-1/5  flex flex-col justify-around items-center bg-gray-950">
+    <aside className="w-1/5  flex flex-col justify-around items-center bg-gray-950 border-r border-gray-600">
       <Header />
       <div className=" h-[30%] w-[100%] flex flex-col justify-around items-center">
         <ButtonAside
